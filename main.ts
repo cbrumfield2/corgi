@@ -378,32 +378,6 @@ function corgiSpawn () {
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite2, location2) {
     info.changeLifeBy(-3)
 })
-function corgiWeapon (shots: number) {
-    if (controller.A.isPressed()) {
-        for (let index = 0; index <= shots; index++) {
-            if (controller.left.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . 2 2 2 . . . . . . 
-                    2 1 1 1 2 2 . . . . 
-                    1 1 1 1 1 3 2 2 . . 
-                    1 1 1 1 1 1 1 3 3 3 
-                    2 1 1 1 3 2 2 . . . 
-                    . 2 2 2 . . . . . . 
-                    `, myCorg.sprite, -150, 0)
-            } else {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . 2 2 2 . 
-                    . . . . 2 2 1 1 1 2 
-                    . . 2 2 3 1 1 1 1 1 
-                    3 3 3 1 1 1 1 1 1 1 
-                    . . . 2 2 3 1 1 1 2 
-                    . . . . . . 2 2 2 . 
-                    `, myCorg.sprite, 150, 0)
-            }
-            pause(500)
-        }
-    }
-}
 // Allows corgi to harm enemies via projectiles.
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.enemyFrog, function (sprite4, otherSprite) {
     otherSprite.destroy(effects.disintegrate, 1000)
@@ -417,9 +391,6 @@ let lvl2 = 0
 corgiSpawn()
 lvl2 = 1
 lvlFunction(lvl2)
-game.onUpdate(function () {
-    corgiWeapon(10)
-})
 // This animates Frog2.
 game.onUpdate(function () {
     if (Frog2.vx <= 0) {
@@ -686,5 +657,25 @@ game.onUpdate(function () {
 })
 // This is what allows the corgi to fire projectiles.
 game.onUpdateInterval(375, function () {
-	
+    if (controller.A.isPressed()) {
+        if (controller.left.isPressed()) {
+            projectile = sprites.createProjectileFromSprite(img`
+                . 2 2 2 . . . . . . 
+                2 1 1 1 2 2 . . . . 
+                1 1 1 1 1 3 2 2 . . 
+                1 1 1 1 1 1 1 3 3 3 
+                2 1 1 1 3 2 2 . . . 
+                . 2 2 2 . . . . . . 
+                `, myCorg.sprite, -150, 0)
+        } else {
+            projectile = sprites.createProjectileFromSprite(img`
+                . . . . . . 2 2 2 . 
+                . . . . 2 2 1 1 1 2 
+                . . 2 2 3 1 1 1 1 1 
+                3 3 3 1 1 1 1 1 1 1 
+                . . . 2 2 3 1 1 1 2 
+                . . . . . . 2 2 2 . 
+                `, myCorg.sprite, 150, 0)
+        }
+    }
 })

@@ -79,8 +79,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.enemyFrog, function (sprite7, ot
     pause(1000)
     myCorg.sprite.setKind(SpriteKind.Player)
 })
-// Changes the level of the game with variables.
-function lvlFunction (lvl: number) {
+// Changes the level of the game with variables. (nmbrEnemies will always be a factor of 3 in total)
+function lvlFunction (lvl: number, nmbrEnemies: number) {
     if (lvl == 1) {
         tiles.setTilemap(tilemap`level1`)
         scene.setBackgroundImage(img`
@@ -205,7 +205,10 @@ function lvlFunction (lvl: number) {
             9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
             9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
             `)
-        enemySpawn()
+        for (let index = 0; index < nmbrEnemies; index++) {
+            enemySpawn()
+            pause(1000)
+        }
     } else if (lvl == 2) {
         enemyDespawn()
         tiles.setTilemap(tilemap`level2`)
@@ -361,7 +364,7 @@ scene.onOverlapTile(SpriteKind.enemyFrog, assets.tile`myTile5`, function (sprite
 // This is the end marker for each level.
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.saplingPine, function (sprite3, location3) {
     lvl2 += 1
-    lvlFunction(lvl2)
+    lvlFunction(lvl2, 1)
     info.setLife(3)
 })
 // This spawns in the corgi, it allows movement, andimation, and gravity as well.
@@ -382,6 +385,9 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sp
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.enemyFrog, function (sprite4, otherSprite) {
     otherSprite.destroy(effects.disintegrate, 1000)
 })
+function enemyArray () {
+	
+}
 let projectile: Sprite = null
 let myCorg: Corgio = null
 let Frog3: Sprite = null
@@ -390,7 +396,8 @@ let Frog1: Sprite = null
 let lvl2 = 0
 corgiSpawn()
 lvl2 = 1
-lvlFunction(lvl2)
+let nmbrEnemies = 1
+lvlFunction(lvl2, nmbrEnemies)
 // This animates Frog2.
 game.onUpdate(function () {
     if (Frog2.vx <= 0) {

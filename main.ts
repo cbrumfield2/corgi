@@ -4,7 +4,7 @@ namespace SpriteKind {
 }
 // This spawns in the enemies and starts their movement.
 function enemySpawn () {
-    Frog1 = sprites.create(img`
+    badGuy2 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . c c c c c 
@@ -22,8 +22,8 @@ function enemySpawn () {
         . c 1 c f f 1 c 7 6 f 6 6 c c . 
         . c c c c c c c c c c c c . . . 
         `, SpriteKind.enemyFrog)
-    tiles.placeOnRandomTile(Frog1, assets.tile`myTile1`)
-    Frog1.setVelocity(-20, 0)
+    tiles.placeOnRandomTile(badGuy2, assets.tile`myTile1`)
+    badGuy2.setVelocity(-20, 0)
     Frog2 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -44,7 +44,7 @@ function enemySpawn () {
         `, SpriteKind.enemyFrog)
     tiles.placeOnRandomTile(Frog2, assets.tile`myTile3`)
     Frog2.setVelocity(20, 0)
-    Frog3 = sprites.create(img`
+    badGuy3 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . c c c c c 
@@ -62,8 +62,8 @@ function enemySpawn () {
         . c 1 c f f 1 c 7 6 f 6 6 c c . 
         . c c c c c c c c c c c c . . . 
         `, SpriteKind.enemyFrog)
-    tiles.placeOnRandomTile(Frog3, assets.tile`myTile4`)
-    Frog3.setVelocity(-20, 0)
+    tiles.placeOnRandomTile(badGuy3, assets.tile`myTile4`)
+    badGuy3.setVelocity(-20, 0)
 }
 // This makes the enemies bounce off of walls.
 scene.onHitWall(SpriteKind.enemyFrog, function (sprite, location) {
@@ -349,10 +349,107 @@ function lvlFunction (lvl: number, nmbrEnemies: number) {
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite6, location5) {
     info.changeLifeBy(-3)
 })
+// This spawns in the enemies and starts their movement.
+function enemySpawn2 () {
+    enemySprites = [
+    img`
+        ........................
+        ........................
+        ........................
+        ........................
+        ..........fffff.........
+        ........ff11111f........
+        .......fb111111bf.......
+        ......fbd1111111f.......
+        ......fddd111111df......
+        ......fdddd11111df......
+        ......fddddddd11df......
+        ......fddddddd111f......
+        ......fddddddcf11f......
+        .......fbdddb1111bf.....
+        ........fffcfdb1b1f.....
+        .......ffffffffbfbf.....
+        ....ff.fffffffffff......
+        .....ffffffff...........
+        .....ffffffb1b1f........
+        ......ffffffbfbf........
+        ........................
+        ........................
+        ........................
+        ........................
+        `,
+    img`
+        f f f . . . . . . . . f f f . . 
+        c b b c f . . . . . . c c f f . 
+        . c b b c f . . . . . . c c f f 
+        . c c c b f . . . . . . c f c f 
+        . c c b b c f . c c . c c f f f 
+        . c b b c b f c c 3 c c 3 c f f 
+        . c b c c b f c b 3 c b 3 b f f 
+        . . c c c b b c b b b b b b c . 
+        . . . c c c c b b 1 b b b 1 c . 
+        . . . . c c b b b b b b b b b c 
+        . . . . f b b b b c b b b c b c 
+        . . . c f b b b b 1 f f f 1 b f 
+        . . c c f b b b b b b b b b b f 
+        . . . . f c b b b b b b b b f . 
+        . . . . . f c b b b b b b f . . 
+        . . . . . . f f f f f f f . . . 
+        `,
+    img`
+        . . . . . . . . . . . c c c c c 
+        . . . . . . . . . c c 7 7 7 6 c 
+        . . . . . . . . c c 7 7 7 c c . 
+        . . . . . . . . c 6 7 7 c . . . 
+        . . . . . . . . c 6 6 6 c . . . 
+        . . . . . . . . c 6 6 6 c c . . 
+        . . . c c c c c c c 6 6 6 c c . 
+        . . c 6 7 7 7 7 6 c c 6 6 6 c . 
+        . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
+        c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
+        c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
+        f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
+        f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
+        . f 7 7 7 7 7 7 7 7 6 f 6 6 c . 
+        . c 1 c f f 1 c 7 6 f 6 6 c c . 
+        . c c c c c c c c c c c c . . . 
+        `,
+    img`
+        . . . . . . . . . . . . . . . . 
+        . . . . c c c c . . . . . . . . 
+        . . c c 5 5 5 5 c c . . . . . . 
+        . c 5 5 5 5 5 5 5 5 c . . . . . 
+        c 5 5 5 5 5 1 f 5 5 5 c . . . . 
+        c 5 5 5 5 5 f f 5 5 5 5 c . . . 
+        c 5 5 5 5 5 5 5 5 5 5 5 c . . . 
+        c c b b 1 b 5 5 5 5 5 5 d c . . 
+        c 5 3 3 3 5 5 5 5 5 d d d c . . 
+        . b 5 5 5 5 5 5 5 5 d d d c . . 
+        . . c b b c 5 5 b d d d d c . . 
+        . c b b c 5 5 b b d d d d c c c 
+        . c c c c c c d d d d d d d d c 
+        . . . c c c c d 5 5 b d d c c . 
+        . . c b b c c c 5 5 b c c . . . 
+        . . c c c c c d 5 5 c . . . . . 
+        `
+    ]
+    badGuyRand = enemySprites._pickRandom()
+    badGuy1 = sprites.create(badGuyRand, SpriteKind.enemyFrog)
+    tiles.placeOnRandomTile(badGuy1, assets.tile`myTile1`)
+    badGuy1.setVelocity(-20, 0)
+    badGuyRand2 = enemySprites._pickRandom()
+    badGuy2 = sprites.create(badGuyRand2, SpriteKind.enemyFrog)
+    tiles.placeOnRandomTile(badGuy2, assets.tile`myTile3`)
+    badGuy2.setVelocity(20, 0)
+    badguyRand3 = enemySprites._pickRandom()
+    badGuy3 = sprites.create(badguyRand3, SpriteKind.enemyFrog)
+    tiles.placeOnRandomTile(badGuy3, assets.tile`myTile4`)
+    badGuy3.setVelocity(-20, 0)
+}
 function enemyDespawn () {
-    Frog1.destroy()
+    badGuy2.destroy()
     Frog2.destroy()
-    Frog3.destroy()
+    badGuy3.destroy()
 }
 // This makes the enemies bounce on this type of block which stops them from going places without stopping the corgi as well.
 scene.onOverlapTile(SpriteKind.enemyFrog, assets.tile`myTile5`, function (sprite5, location4) {
@@ -389,10 +486,15 @@ function enemyArray () {
 	
 }
 let projectile: Sprite = null
+let badguyRand3: Image = null
+let badGuyRand2: Image = null
+let badGuy1: Sprite = null
+let badGuyRand: Image = null
+let enemySprites: Image[] = []
 let myCorg: Corgio = null
-let Frog3: Sprite = null
+let badGuy3: Sprite = null
 let Frog2: Sprite = null
-let Frog1: Sprite = null
+let badGuy2: Sprite = null
 let lvl2 = 0
 corgiSpawn()
 lvl2 = 1
@@ -488,9 +590,9 @@ game.onUpdate(function () {
 })
 // This animates Frog 1.
 game.onUpdate(function () {
-    if (Frog1.vx <= 0) {
+    if (badGuy2.vx <= 0) {
         animation.runImageAnimation(
-        Frog1,
+        badGuy2,
         [img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -529,9 +631,9 @@ game.onUpdate(function () {
         250,
         true
         )
-    } else if (Frog1.vx > 0) {
+    } else if (badGuy2.vx > 0) {
         animation.runImageAnimation(
-        Frog1,
+        badGuy2,
         [img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -576,9 +678,9 @@ game.onUpdate(function () {
 })
 // This animates Frog 3.
 game.onUpdate(function () {
-    if (Frog3.vx <= 0) {
+    if (badGuy3.vx <= 0) {
         animation.runImageAnimation(
-        Frog3,
+        badGuy3,
         [img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -617,9 +719,9 @@ game.onUpdate(function () {
         250,
         true
         )
-    } else if (Frog3.vx > 0) {
+    } else if (badGuy3.vx > 0) {
         animation.runImageAnimation(
-        Frog3,
+        badGuy3,
         [img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 

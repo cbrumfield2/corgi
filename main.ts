@@ -482,9 +482,6 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sp
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.enemyFrog, function (sprite4, otherSprite) {
     otherSprite.destroy(effects.disintegrate, 1000)
 })
-function enemyArray () {
-	
-}
 let projectile: Sprite = null
 let badguyRand3: Image = null
 let badGuyRand2: Image = null

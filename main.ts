@@ -407,8 +407,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite7, otherS
     myCorg.sprite.setKind(SpriteKind.Player)
 })
 // Allows corgi to harm enemies via projectiles.
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.enemyFrog, function (sprite4, otherSprite) {
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite4, otherSprite) {
     otherSprite.destroy(effects.disintegrate, 1000)
+    otherSprite.setVelocity(0, 0)
 })
 let projectile: Sprite = null
 let badGuy3: Sprite = null

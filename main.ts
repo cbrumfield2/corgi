@@ -2,69 +2,6 @@ namespace SpriteKind {
     export const enemyFrog = SpriteKind.create()
     export const Ghost = SpriteKind.create()
 }
-// This spawns in the enemies and starts their movement.
-function enemySpawn () {
-    badGuy2 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . c c c c c 
-        . . . . . . . . . c c 7 7 7 6 c 
-        . . . . . . . . c c 7 7 7 c c . 
-        . . . . . . . . c 6 7 7 c . . . 
-        . . . . . . . . c 6 6 6 c . . . 
-        . . . c c c c c c 6 6 6 c c . . 
-        . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-        . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-        c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-        c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-        f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-        f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-        . c 1 c f f 1 c 7 6 f 6 6 c c . 
-        . c c c c c c c c c c c c . . . 
-        `, SpriteKind.enemyFrog)
-    tiles.placeOnRandomTile(badGuy2, assets.tile`myTile1`)
-    badGuy2.setVelocity(-20, 0)
-    Frog2 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . c c c c c 
-        . . . . . . . . . c c 7 7 7 6 c 
-        . . . . . . . . c c 7 7 7 c c . 
-        . . . . . . . . c 6 7 7 c . . . 
-        . . . . . . . . c 6 6 6 c . . . 
-        . . . c c c c c c 6 6 6 c c . . 
-        . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-        . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-        c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-        c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-        f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-        f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-        . c 1 c f f 1 c 7 6 f 6 6 c c . 
-        . c c c c c c c c c c c c . . . 
-        `, SpriteKind.enemyFrog)
-    tiles.placeOnRandomTile(Frog2, assets.tile`myTile3`)
-    Frog2.setVelocity(20, 0)
-    badGuy3 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . c c c c c 
-        . . . . . . . . . c c 7 7 7 6 c 
-        . . . . . . . . c c 7 7 7 c c . 
-        . . . . . . . . c 6 7 7 c . . . 
-        . . . . . . . . c 6 6 6 c . . . 
-        . . . c c c c c c 6 6 6 c c . . 
-        . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-        . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-        c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-        c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-        f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-        f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-        . c 1 c f f 1 c 7 6 f 6 6 c c . 
-        . c c c c c c c c c c c c . . . 
-        `, SpriteKind.enemyFrog)
-    tiles.placeOnRandomTile(badGuy3, assets.tile`myTile4`)
-    badGuy3.setVelocity(-20, 0)
-}
 // This makes the enemies bounce off of walls.
 scene.onHitWall(SpriteKind.enemyFrog, function (sprite, location) {
     sprite.setKind(SpriteKind.Ghost)
@@ -206,7 +143,7 @@ function lvlFunction (lvl: number, nmbrEnemies: number) {
             9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
             `)
         for (let index = 0; index < nmbrEnemies; index++) {
-            enemySpawn()
+            enemySpawn2()
             pause(1000)
         }
     } else if (lvl == 2) {
@@ -447,8 +384,8 @@ function enemySpawn2 () {
     badGuy3.setVelocity(-20, 0)
 }
 function enemyDespawn () {
+    badGuy1.destroy()
     badGuy2.destroy()
-    Frog2.destroy()
     badGuy3.destroy()
 }
 // This makes the enemies bounce on this type of block which stops them from going places without stopping the corgi as well.
@@ -483,284 +420,19 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.enemyFrog, function (sprite4
     otherSprite.destroy(effects.disintegrate, 1000)
 })
 let projectile: Sprite = null
+let badGuy3: Sprite = null
 let badguyRand3: Image = null
+let badGuy2: Sprite = null
 let badGuyRand2: Image = null
 let badGuy1: Sprite = null
 let badGuyRand: Image = null
 let enemySprites: Image[] = []
 let myCorg: Corgio = null
-let badGuy3: Sprite = null
-let Frog2: Sprite = null
-let badGuy2: Sprite = null
 let lvl2 = 0
 corgiSpawn()
 lvl2 = 1
 let nmbrEnemies = 1
 lvlFunction(lvl2, nmbrEnemies)
-// This animates Frog2.
-game.onUpdate(function () {
-    if (Frog2.vx <= 0) {
-        animation.runImageAnimation(
-        Frog2,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . c c c c c 
-            . . . . . . . . . c c 7 7 7 6 c 
-            . . . . . . . . c c 7 7 7 c c . 
-            . . . . . . . . c 6 7 7 c . . . 
-            . . . . . . . . c 6 6 6 c . . . 
-            . . . c c c c c c 6 6 6 c c . . 
-            . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-            . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-            c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-            c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-            f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-            f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-            . c 1 c f f 1 c 7 6 f 6 6 c c . 
-            . c c c c c c c c c c c c . . . 
-            `,img`
-            . . . . . . . . . . . c c c c c 
-            . . . . . . . . . c c 7 7 7 6 c 
-            . . . . . . . . c c 7 7 7 c c . 
-            . . . . . . . . c 6 7 7 c . . . 
-            . . . . . . . . c 6 6 6 c . . . 
-            . . . . . . . . c 6 6 6 c c . . 
-            . . . c c c c c c c 6 6 6 c c . 
-            . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-            . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-            c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-            c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-            f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-            f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-            . f 7 7 7 7 7 7 7 7 6 f 6 6 c . 
-            . c 1 c f f 1 c 7 6 f 6 6 c c . 
-            . c c c c c c c c c c c c . . . 
-            `],
-        250,
-        true
-        )
-    } else if (Frog2.vx > 0) {
-        animation.runImageAnimation(
-        Frog2,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            c c c c c . . . . . . . . . . . 
-            c 6 7 7 7 c c . . . . . . . . . 
-            . c c 7 7 7 c c . . . . . . . . 
-            . . . c 7 7 6 c . . . . . . . . 
-            . . . c 6 6 6 c . . . . . . . . 
-            . . c c 6 6 6 c c c c c c . . . 
-            . c 6 6 6 c c 6 7 7 7 7 6 c . . 
-            c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
-            c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
-            c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
-            c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
-            c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
-            . c c 6 6 f 6 7 c 1 f f c 1 c . 
-            . . . c c c c c c c c c c c c . 
-            `,img`
-            c c c c c . . . . . . . . . . . 
-            c 6 7 7 7 c c . . . . . . . . . 
-            . c c 7 7 7 c c . . . . . . . . 
-            . . . c 7 7 6 c . . . . . . . . 
-            . . . c 6 6 6 c . . . . . . . . 
-            . . c c 6 6 6 c . . . . . . . . 
-            . c c 6 6 6 c c c c c c c . . . 
-            . c 6 6 6 c c 6 7 7 7 7 6 c . . 
-            c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
-            c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
-            c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
-            c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
-            c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
-            . c 6 6 f 6 7 7 7 7 7 7 7 7 f . 
-            . c c 6 6 f 6 7 c 1 f f c 1 c . 
-            . . . c c c c c c c c c c c c . 
-            `],
-        250,
-        true
-        )
-    } else {
-    	
-    }
-})
-// This animates Frog 1.
-game.onUpdate(function () {
-    if (badGuy2.vx <= 0) {
-        animation.runImageAnimation(
-        badGuy2,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . c c c c c 
-            . . . . . . . . . c c 7 7 7 6 c 
-            . . . . . . . . c c 7 7 7 c c . 
-            . . . . . . . . c 6 7 7 c . . . 
-            . . . . . . . . c 6 6 6 c . . . 
-            . . . c c c c c c 6 6 6 c c . . 
-            . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-            . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-            c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-            c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-            f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-            f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-            . c 1 c f f 1 c 7 6 f 6 6 c c . 
-            . c c c c c c c c c c c c . . . 
-            `,img`
-            . . . . . . . . . . . c c c c c 
-            . . . . . . . . . c c 7 7 7 6 c 
-            . . . . . . . . c c 7 7 7 c c . 
-            . . . . . . . . c 6 7 7 c . . . 
-            . . . . . . . . c 6 6 6 c . . . 
-            . . . . . . . . c 6 6 6 c c . . 
-            . . . c c c c c c c 6 6 6 c c . 
-            . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-            . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-            c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-            c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-            f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-            f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-            . f 7 7 7 7 7 7 7 7 6 f 6 6 c . 
-            . c 1 c f f 1 c 7 6 f 6 6 c c . 
-            . c c c c c c c c c c c c . . . 
-            `],
-        250,
-        true
-        )
-    } else if (badGuy2.vx > 0) {
-        animation.runImageAnimation(
-        badGuy2,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            c c c c c . . . . . . . . . . . 
-            c 6 7 7 7 c c . . . . . . . . . 
-            . c c 7 7 7 c c . . . . . . . . 
-            . . . c 7 7 6 c . . . . . . . . 
-            . . . c 6 6 6 c . . . . . . . . 
-            . . c c 6 6 6 c c c c c c . . . 
-            . c 6 6 6 c c 6 7 7 7 7 6 c . . 
-            c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
-            c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
-            c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
-            c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
-            c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
-            . c c 6 6 f 6 7 c 1 f f c 1 c . 
-            . . . c c c c c c c c c c c c . 
-            `,img`
-            c c c c c . . . . . . . . . . . 
-            c 6 7 7 7 c c . . . . . . . . . 
-            . c c 7 7 7 c c . . . . . . . . 
-            . . . c 7 7 6 c . . . . . . . . 
-            . . . c 6 6 6 c . . . . . . . . 
-            . . c c 6 6 6 c . . . . . . . . 
-            . c c 6 6 6 c c c c c c c . . . 
-            . c 6 6 6 c c 6 7 7 7 7 6 c . . 
-            c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
-            c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
-            c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
-            c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
-            c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
-            . c 6 6 f 6 7 7 7 7 7 7 7 7 f . 
-            . c c 6 6 f 6 7 c 1 f f c 1 c . 
-            . . . c c c c c c c c c c c c . 
-            `],
-        250,
-        true
-        )
-    } else {
-    	
-    }
-})
-// This animates Frog 3.
-game.onUpdate(function () {
-    if (badGuy3.vx <= 0) {
-        animation.runImageAnimation(
-        badGuy3,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . c c c c c 
-            . . . . . . . . . c c 7 7 7 6 c 
-            . . . . . . . . c c 7 7 7 c c . 
-            . . . . . . . . c 6 7 7 c . . . 
-            . . . . . . . . c 6 6 6 c . . . 
-            . . . c c c c c c 6 6 6 c c . . 
-            . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-            . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-            c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-            c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-            f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-            f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-            . c 1 c f f 1 c 7 6 f 6 6 c c . 
-            . c c c c c c c c c c c c . . . 
-            `,img`
-            . . . . . . . . . . . c c c c c 
-            . . . . . . . . . c c 7 7 7 6 c 
-            . . . . . . . . c c 7 7 7 c c . 
-            . . . . . . . . c 6 7 7 c . . . 
-            . . . . . . . . c 6 6 6 c . . . 
-            . . . . . . . . c 6 6 6 c c . . 
-            . . . c c c c c c c 6 6 6 c c . 
-            . . c 6 7 7 7 7 6 c c 6 6 6 c . 
-            . c 7 7 7 7 7 7 7 7 c 6 6 6 c c 
-            c 6 7 7 7 7 7 7 7 7 6 c 6 6 6 c 
-            c 7 c 6 6 6 6 c 7 7 7 c 6 6 6 c 
-            f 7 c c 6 6 c c 7 7 7 f 6 6 6 c 
-            f 7 6 f 6 6 f 6 7 7 7 f 6 6 6 c 
-            . f 7 7 7 7 7 7 7 7 6 f 6 6 c . 
-            . c 1 c f f 1 c 7 6 f 6 6 c c . 
-            . c c c c c c c c c c c c . . . 
-            `],
-        250,
-        true
-        )
-    } else if (badGuy3.vx > 0) {
-        animation.runImageAnimation(
-        badGuy3,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            c c c c c . . . . . . . . . . . 
-            c 6 7 7 7 c c . . . . . . . . . 
-            . c c 7 7 7 c c . . . . . . . . 
-            . . . c 7 7 6 c . . . . . . . . 
-            . . . c 6 6 6 c . . . . . . . . 
-            . . c c 6 6 6 c c c c c c . . . 
-            . c 6 6 6 c c 6 7 7 7 7 6 c . . 
-            c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
-            c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
-            c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
-            c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
-            c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
-            . c c 6 6 f 6 7 c 1 f f c 1 c . 
-            . . . c c c c c c c c c c c c . 
-            `,img`
-            c c c c c . . . . . . . . . . . 
-            c 6 7 7 7 c c . . . . . . . . . 
-            . c c 7 7 7 c c . . . . . . . . 
-            . . . c 7 7 6 c . . . . . . . . 
-            . . . c 6 6 6 c . . . . . . . . 
-            . . c c 6 6 6 c . . . . . . . . 
-            . c c 6 6 6 c c c c c c c . . . 
-            . c 6 6 6 c c 6 7 7 7 7 6 c . . 
-            c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
-            c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
-            c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
-            c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
-            c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
-            . c 6 6 f 6 7 7 7 7 7 7 7 7 f . 
-            . c c 6 6 f 6 7 c 1 f f c 1 c . 
-            . . . c c c c c c c c c c c c . 
-            `],
-        250,
-        true
-        )
-    } else {
-    	
-    }
-})
 // This is what allows the corgi to fire projectiles.
 game.onUpdateInterval(375, function () {
     if (controller.A.isPressed()) {

@@ -423,7 +423,7 @@ let myCorg: Corgio = null
 let lvl2 = 0
 corgiSpawn()
 lvl2 = 1
-let nmbrEnemies = 1
+let nmbrEnemies = 2
 lvlFunction(lvl2, nmbrEnemies)
 game.onUpdate(function () {
     if (badGuyRand == 0) {

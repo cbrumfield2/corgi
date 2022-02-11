@@ -374,6 +374,7 @@ scene.onHitWall(SpriteKind.Enemy, function (sprite, location) {
     pause(100)
     sprite.setKind(SpriteKind.Enemy)
 })
+// This function de-spawns all of the enemy sprites. We call the function at the beginning of each new level to make sure that no old enemies appear in it again.
 function enemyDespawn () {
     badGuy1.destroy()
     badGuy2.destroy()
@@ -425,6 +426,7 @@ corgiSpawn()
 lvl2 = 1
 let nmbrEnemies = 2
 lvlFunction(lvl2, nmbrEnemies)
+// This animates the first enemy sprite
 game.onUpdate(function () {
     if (badGuyRand == 0) {
         if (badGuy1.vx < 0) {
@@ -978,6 +980,7 @@ game.onUpdate(function () {
     	
     }
 })
+// This animates the second enemy sprite
 game.onUpdate(function () {
     if (badGuyRand2 == 0) {
         if (badGuy2.vx < 0) {
@@ -1531,6 +1534,7 @@ game.onUpdate(function () {
     	
     }
 })
+// This animates the third enemy sprite.
 game.onUpdate(function () {
     if (badguyRand3 == 0) {
         if (badGuy3.vx < 0) {
